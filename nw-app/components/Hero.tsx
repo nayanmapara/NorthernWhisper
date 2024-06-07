@@ -7,7 +7,7 @@ function Hero() {
           Join the waitlist for the
         </h2>
         <h1 className="z-10 text-4xl font-bold text-center text-transparent duration-1000 bg-white bg-gradient-to-r from-blue-50 to-blue-500 animate-fade-in-3 cursor-default sm:text-6xl md:text-7xl whitespace-nowrap bg-clip-text">
-          Newsletter
+          Northern Whisper
         </h1>
       </div>
   )
