@@ -8,32 +8,41 @@ import { getTrailsKeyframes } from '@/lib/getTrailsKeyframes';
 
 function NewsletterForm() {
   const [input, setInput] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const [active, setActive] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const {to, fromTo, set} = gsap;
+  const { to, fromTo, set } = gsap;
+
+  const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption(e.target.value);
+  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const email = input;
-    const button = buttonRef.current
+    const option = selectedOption;
+    const button = buttonRef.current;
 
-    if (!email || !button) return;
+    if (!email || !option || !button) return;
 
     if (!active) {
       setActive(true);
-       
+
       // Animation for plane
       to(button, {
         keyframes: getPlaneKeyframes(set, fromTo, button, setActive, setInput),
-      })
+      });
 
       // Animation for trails
       to(button, {
         keyframes: getTrailsKeyframes(button),
-      })
+      });
     }
-  }
+
+    // Handle form submission logic here, e.g., send to API
+    console.log({ email, option });
+  };
 
   return (
     <div className="flex flex-col space-y-8 md:w-[400px]">
@@ -53,7 +62,7 @@ function NewsletterForm() {
             className={`${
               active && "active"
             } disabled:!bg-[#6D86CB] disabled:grayscale-[65%] disabled:opacity-50 disabled:cursor-not-allowed text-sm md:text-base`}
-            disabled={!input}
+            disabled={!input || !selectedOption}
             type="submit"
           >
             <span className="default">Subscribe</span>
@@ -72,10 +81,35 @@ function NewsletterForm() {
               <div className="right"></div>
             </div>
           </button>
-        </div>    
+        </div>
+
+        <div className="text-[#ffffff] flex items-center gap-x-4 py-1 justify-center mt-4">
+          <label className="flex items-center">
+            <input
+              type="radio"
+              name="option"
+              value="Student"
+              checked={selectedOption === "Student"}
+              onChange={handleOptionChange}
+              className="form-radio h-4 w-4"
+            />
+            <span className="ml-2">Student</span>
+          </label>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              name="option"
+              value="WorkPermit"
+              checked={selectedOption === "WorkPermit"}
+              onChange={handleOptionChange}
+              className="form-radio h-4 w-4"
+            />
+            <span className="ml-2">Work Permit</span>
+          </label>
+        </div>
       </form>
     </div>
-  )
+  );
 }
 
-export default NewsletterForm
+export default NewsletterForm;
