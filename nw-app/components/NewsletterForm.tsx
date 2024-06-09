@@ -17,7 +17,7 @@ function NewsletterForm() {
     setSelectedOption(e.target.value);
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const email = input;
@@ -25,6 +25,22 @@ function NewsletterForm() {
     const button = buttonRef.current;
 
     if (!email || !option || !button) return;
+
+    const response = await fetch('https://db.northernwhisper.tech/api/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, option }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Subscription failed');
+    }
+
+    console.log(result.message);
 
     if (!active) {
       setActive(true);
@@ -39,9 +55,6 @@ function NewsletterForm() {
         keyframes: getTrailsKeyframes(button),
       });
     }
-
-    // Handle form submission logic here, e.g., send to API
-    console.log({ email, option });
   };
 
   return (
