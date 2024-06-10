@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, FormEvent } from 'react';
-import { EnvelopeIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { gsap } from 'gsap';
 import { getPlaneKeyframes } from '@/lib/getPlaneKeyframes';
 import { getTrailsKeyframes } from '@/lib/getTrailsKeyframes';
@@ -10,6 +10,8 @@ function NewsletterForm() {
   const [input, setInput] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [active, setActive] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { to, fromTo, set } = gsap;
 
@@ -26,21 +28,47 @@ function NewsletterForm() {
 
     if (!email || !option || !button) return;
 
-    const response = await fetch('https://db.northernwhisper.tech/api/subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, option }),
-    });
+    try {
+      const response = await fetch('https://db.northernwhisper.tech/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, option }),
+      });
 
-    const result = await response.json();
+      const result = await response.json();
 
-    if (!response.ok) {
-      throw new Error(result.error || 'Subscription failed');
+      if (response.ok) {
+        switch (result.message) {
+          case 'Success':
+            setSuccessMessage("We've added you to our waitlist. We'll let you know when we launch!");
+            setErrorMessage('');
+            break;
+          case 'Already subscribed':
+            setErrorMessage("You are already added to our waitlist. We'll let you know when we launch!");
+            setSuccessMessage('');
+            break;
+          case 'Updated':
+            setSuccessMessage("We've updated your subscription. We'll let you know when we launch!");
+            setErrorMessage('');
+            break;
+          default:
+            setErrorMessage("An unexpected error occurred");
+            setSuccessMessage('');
+        }
+      } else {
+        throw new Error(result.error || 'Subscription failed');
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+        setSuccessMessage('');
+      } else {
+        setErrorMessage('An unexpected error occurred. Please try again later.');
+        setSuccessMessage('');
+      }
     }
-
-    console.log(result.message);
 
     if (!active) {
       setActive(true);
@@ -55,6 +83,11 @@ function NewsletterForm() {
         keyframes: getTrailsKeyframes(button),
       });
     }
+  };
+
+  const dismissMessages = () => {
+    setSuccessMessage("");
+    setErrorMessage("");
   };
 
   return (
@@ -121,6 +154,32 @@ function NewsletterForm() {
           </label>
         </div>
       </form>
+
+      <div className='relative'>
+        {(successMessage || errorMessage) && (
+          <div className="flex items-start space-x-2 bg-[#0A0E12] shadow-outline-gray text-white rounded-[9px] py-4 px-6 animate-fade-bottom absolute">
+            <div className="h-6 w-6 bg-[#1B2926] flex items-center justify-center rounded-full border border-[#273130] flex-shrink-0">
+              {successMessage ? <CheckIcon className="h-4 w-4 text-[#81A89A]" /> : <XMarkIcon className="h-4 w-4 text-[#81A89A]" />}
+            </div>
+            <div className="text-xs sm:text-sm text-[#4B4C52]">
+              {successMessage && (
+                <p>
+                  {successMessage}
+                </p>
+              )}
+              {errorMessage && (
+                <p>
+                  {errorMessage}
+                </p>
+              )}
+            </div>
+            <XMarkIcon
+              className="h-5 w-5 cursor-pointer flex-shrink-0 text-[#4A4B55]"
+              onClick={dismissMessages}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
