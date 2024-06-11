@@ -6,7 +6,7 @@ const PrivacyPolicy: React.FC = () => {
       <h1 className="text-2xl font-semibold mb-4">Privacy Policy</h1>
       
       <h2 className="text-xl font-semibold mt-6 mb-4">Introduction</h2>
-      <p>Welcome to Northern Whisper's Privacy Policy. This policy outlines how we collect, use, disclose, and safeguard your information when you visit our website.</p>
+      <p>Welcome to Northern Whisper&apos;s Privacy Policy. This policy outlines how we collect, use, disclose, and safeguard your information when you visit our website.</p>
       
       <h2 className="text-xl font-semibold mt-6 mb-4">Information We Collect</h2>
       <h3 className="text-lg font-semibold mt-4 mb-2">Personal Information</h3>

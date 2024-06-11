@@ -6,7 +6,7 @@ const TermsOfService: React.FC = () => {
       <h1 className="text-2xl font-semibold mb-4">Terms of Service</h1>
       
       <h2 className="text-xl font-semibold mt-6 mb-4">Acceptance of Terms</h2>
-      <p>Welcome to Northern Whisper's Terms of Service. By accessing or using our website, you agree to comply with and be bound by these terms. If you do not agree with any part of these terms, you must not use our website.</p>
+      <p>Welcome to Northern Whisper&apos;s Terms of Service. By accessing or using our website, you agree to comply with and be bound by these terms. If you do not agree with any part of these terms, you must not use our website.</p>
       
       <h2 className="text-xl font-semibold mt-6 mb-4">Use License</h2>
       <p>We grant you permission to use our website for personal, non-commercial purposes, subject to the following conditions:</p>
@@ -15,7 +15,7 @@ const TermsOfService: React.FC = () => {
         <li>You must not use the materials for any commercial purpose or for any public display (commercial or non-commercial).</li>
         <li>You must not attempt to decompile or reverse engineer any software contained on our website.</li>
         <li>You must not remove any copyright or other proprietary notations from the materials.</li>
-        <li>You must not transfer the materials to another person or "mirror" the materials on any other server.</li>
+        <li>You must not transfer the materials to another person or &quot;mirror&quot; the materials on any other server.</li>
       </ul>
       <p>Unauthorized use may result in termination of this license and may subject you to legal action.</p>
       
