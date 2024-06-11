@@ -2,6 +2,7 @@ import Image from "next/image";
 import Hero from "@/components/Hero";
 import NewsletterForm from "@/components/NewsletterForm";
 import Footer from "@/components/Footer";
+import Socials from "@/components/Socials";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
         {/* <Header /> */}
         <Hero />
         <NewsletterForm />
-        {/* <Socials /> */}
+        <Socials />
       </main>
       <Footer />
     </div>
