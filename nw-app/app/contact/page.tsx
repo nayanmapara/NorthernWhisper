@@ -62,7 +62,7 @@ const ContactPage: React.FC = () => {
     <div className="bg-[#03040B] flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow flex flex-col items-center justify-center p-10">
-        <h1 className="text-4xl font-bold text-white mb-8">Contact Us</h1>
+        <h1 className="text-5xl font-bold text-white mb-8">Contact Us</h1>
         <form ref={formRef} onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md">
           <div className="mb-4">
             <label htmlFor="name" className="block text-sm font-medium text-gray-400">Name</label>
