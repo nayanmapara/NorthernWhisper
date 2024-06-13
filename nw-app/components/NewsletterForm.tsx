@@ -28,6 +28,20 @@ function NewsletterForm() {
 
     if (!email || !option || !button) return;
 
+    if (!active) {
+      setActive(true);
+
+      // Animation for plane
+      to(button, {
+        keyframes: getPlaneKeyframes(set, fromTo, button, setActive, setInput),
+      });
+
+      // Animation for trails
+      to(button, {
+        keyframes: getTrailsKeyframes(button),
+      });
+    }
+
     try {
       const response = await fetch('https://db.northernwhisper.tech/api/subscribe', {
         method: 'POST',
@@ -68,20 +82,6 @@ function NewsletterForm() {
         setErrorMessage('An unexpected error occurred. Please try again later.');
         setSuccessMessage('');
       }
-    }
-
-    if (!active) {
-      setActive(true);
-
-      // Animation for plane
-      to(button, {
-        keyframes: getPlaneKeyframes(set, fromTo, button, setActive, setInput),
-      });
-
-      // Animation for trails
-      to(button, {
-        keyframes: getTrailsKeyframes(button),
-      });
     }
   };
 
