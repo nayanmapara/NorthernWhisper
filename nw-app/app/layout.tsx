@@ -6,9 +6,6 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 const gId = process.env.NEXT_PUBLIC_GA_ID ?? "";
-if (gId === undefined) {
-  throw new Error("Google Analytics ID is not defined.");
-}
 
 export const metadata: Metadata = {
   title: "Northern Whisper",
