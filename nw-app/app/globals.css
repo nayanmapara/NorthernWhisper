@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 @layer base {
   .text-stroke {
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
@@ -216,4 +218,19 @@
     stroke: var(--success);
     stroke-dashoffset: var(--success-stroke);
   }
+
+  .header-title {
+    font-family: 'Pacifico', cursive;
+    color: #6D86CB;
+    text-shadow: 
+    -1px -1px 0 #fff,  
+    1px -1px 0 #fff, 
+    -1px 1px 0 #fff,   
+    1px 1px 0 #fff,    
+    0px -1px 0 #fff,   
+    1px 0px 0 #fff,    
+    -1px 0px 0 #fff,   
+    0px 1px 0 #fff;
+  }
+
 }
