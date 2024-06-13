@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from '@next/third-parties/google'
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const gId = process.env.NEXT_PUBLIC_GA_ID ?? "";
+if (gId === undefined) {
+  throw new Error("Google Analytics ID is not defined.");
+}
 
 export const metadata: Metadata = {
   title: "Northern Whisper",
@@ -26,6 +31,7 @@ export default function RootLayout({
 
       </head>
       <body className={inter.className}>{children}</body>
+      <GoogleAnalytics gaId={gId} />
     </html>
   );
 }
