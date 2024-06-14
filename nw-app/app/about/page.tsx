@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import Socials from '@/components/Socials';
 
 const AboutPage: React.FC = () => {
   return (
@@ -32,7 +33,7 @@ const AboutPage: React.FC = () => {
             </p>
           </section>
           
-          <section className="mb-16">
+          <section className="mb-2">
             <h2 className="text-3xl font-semibold mb-4">Get in Touch</h2>
             <p className="leading-relaxed mb-4">
               We love hearing from you! If you have any questions, comments, or just want to say hi, drop us a line.
@@ -45,6 +46,7 @@ const AboutPage: React.FC = () => {
               <FaMapMarkerAlt className="text-blue-500 mr-2" />
               <p>Oakville, ON, Canada</p>
             </div>
+            <div className='flex justify-center'><Socials /></div>
           </section>
         </div>
       </main>
