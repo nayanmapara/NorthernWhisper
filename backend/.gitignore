@@ -1,0 +1,9 @@
+# cache
+__pycache__/
+.pytest_cache/
+
+# environment variables
+.env
+
+# Additional files
+user_creator.py
